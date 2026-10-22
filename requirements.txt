@@ -1,0 +1,8 @@
+# analysis scripts (analysis/) and tools/privacy_check.py
+matplotlib
+numpy
+pillow
+# make_collage.py also needs ffmpeg on PATH
+
+# installation runtime (src/python/, once added)
+# torch, open_clip_torch, mediapipe, opencv-python, requests, python-osc, mido

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-24 -14 1048 368" width="1048" height="368" role="img" aria-label="real &amp; rendered system map: two Kinects into a Unity bridge, a Python perception loop, LLaVA via Ollama, three projectors, TRIBE v2 and CLIP on a GPU machine, and memory on disk">
+<style>
+  .bg { fill: #0c0b09; }
+  .d-box { fill: #111008; stroke: #2e2a23; }
+  .d-stage { font-family: 'Space Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 9px; letter-spacing: 2.2px; fill: #ea5fb0; }
+  .d-title { font-family: 'Space Grotesk', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; fill: #ddd9d0; }
+  .d-sub { font-family: 'Space Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 9.5px; fill: #8f8a80; }
+  .d-label { font-family: 'Space Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 9px; fill: #8f8a80; letter-spacing: 0.5px; }
+  .d-line { stroke: #ea5fb0; stroke-width: 1; fill: none; opacity: 0.75; }
+  .d-dash { stroke: #ea5fb0; stroke-width: 1; fill: none; opacity: 0.55; stroke-dasharray: 3 4; }
+  .d-arrow { fill: #ea5fb0; opacity: 0.85; }
+</style>
+<rect class="bg" x="-24" y="-14" width="1048" height="368" rx="6"/>
+                <path class="d-dash" d="M297 86 V46 H903 V79"/><polygon class="d-arrow" points="903,86 899,78 907,78"/>
+                <text class="d-label" x="600" y="38" text-anchor="middle">merged point cloud → projectors A + B</text>
+
+                <g class="node" data-node="sense">
+                  <rect class="d-box" x="10" y="86" width="170" height="104"/>
+                  <text class="d-stage" x="24" y="108">SENSE</text>
+                  <text class="d-title" x="24" y="132">2 × Kinect v1</text>
+                  <text class="d-sub" x="24" y="154">depth + RGB · 30 fps</text>
+                  <text class="d-sub" x="24" y="170">opposing corners</text>
+                </g>
+                <g class="node" data-node="fuse">
+                  <rect class="d-box" x="212" y="86" width="170" height="104"/>
+                  <text class="d-stage" x="226" y="108">FUSE</text>
+                  <text class="d-title" x="226" y="132">Unity bridge</text>
+                  <text class="d-sub" x="226" y="154">merge · ICP · smooth</text>
+                  <text class="d-sub" x="226" y="170">plate · presence</text>
+                </g>
+                <g class="node" data-node="perceive">
+                  <rect class="d-box" x="414" y="86" width="170" height="104"/>
+                  <text class="d-stage" x="428" y="108">PERCEIVE</text>
+                  <text class="d-title" x="428" y="132">Perception loop</text>
+                  <text class="d-sub" x="428" y="154">clips · pose · recall</text>
+                  <text class="d-sub" x="428" y="170">7 context streams</text>
+                </g>
+                <g class="node" data-node="speak">
+                  <rect class="d-box" x="616" y="86" width="170" height="104"/>
+                  <text class="d-stage" x="630" y="108">SPEAK</text>
+                  <text class="d-title" x="630" y="132">LLaVA via Ollama</text>
+                  <text class="d-sub" x="630" y="154">local · one line</text>
+                  <text class="d-sub" x="630" y="170">persona · filters</text>
+                </g>
+                <g class="node" data-node="show">
+                  <rect class="d-box" x="818" y="86" width="170" height="104"/>
+                  <text class="d-stage" x="832" y="108">SHOW</text>
+                  <text class="d-title" x="832" y="132">3 projectors</text>
+                  <text class="d-sub" x="832" y="154">A + B · point cloud</text>
+                  <text class="d-sub" x="832" y="170">C · captions</text>
+                </g>
+                <g class="node" data-node="gpu">
+                  <rect class="d-box" x="414" y="242" width="170" height="90"/>
+                  <text class="d-stage" x="428" y="264">GPU HOST</text>
+                  <text class="d-title" x="428" y="288">TRIBE v2 + CLIP</text>
+                  <text class="d-sub" x="428" y="310">RTX 3090 · LAN · REST</text>
+                </g>
+                <g class="node" data-node="memory">
+                  <rect class="d-box" x="616" y="242" width="170" height="90"/>
+                  <text class="d-stage" x="630" y="264">MEMORY</text>
+                  <text class="d-title" x="630" y="288">JSON on disk</text>
+                  <text class="d-sub" x="630" y="310">04:00 reflection</text>
+                </g>
+
+                <path class="d-line" d="M180 138 H205"/><polygon class="d-arrow" points="212,138 204,134 204,142"/>
+                <path class="d-line" d="M382 138 H407"/><polygon class="d-arrow" points="414,138 406,134 406,142"/>
+                <path class="d-line" d="M584 138 H609"/><polygon class="d-arrow" points="616,138 608,134 608,142"/>
+                <path class="d-line" d="M786 138 H811"/><polygon class="d-arrow" points="818,138 810,134 810,142"/>
+                <text class="d-label" x="398" y="128" text-anchor="middle">RGB</text>
+                <text class="d-label" x="600" y="128" text-anchor="middle">prompt</text>
+                <text class="d-label" x="802" y="128" text-anchor="middle">line</text>
+
+                <path class="d-line" d="M478 190 V235"/><polygon class="d-arrow" points="478,242 474,234 482,234"/>
+                <path class="d-dash" d="M520 242 V197"/><polygon class="d-arrow" points="520,190 516,198 524,198"/>
+                <text class="d-label" x="470" y="220" text-anchor="end">clip · frame</text>
+                <text class="d-label" x="528" y="220">scores · vector</text>
+                <path class="d-line" d="M680 190 V235"/><polygon class="d-arrow" points="680,242 676,234 684,234"/>
+                <path class="d-dash" d="M722 242 V197"/><polygon class="d-arrow" points="722,190 718,198 726,198"/>
+                <text class="d-label" x="672" y="220" text-anchor="end">write</text>
+                <text class="d-label" x="730" y="220">inject</text>
+              </svg>

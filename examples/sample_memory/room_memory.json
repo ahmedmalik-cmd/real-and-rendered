@@ -1,0 +1,788 @@
+{
+ "history": [
+  {
+   "t": "2026-05-18T15:25:30",
+   "text": "One body inside, very tall.",
+   "mean": 0.0055,
+   "peak": 0.02741,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-18T15:26:15",
+   "text": "You came back.",
+   "mean": 0.00474,
+   "peak": 0.01264,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-18T16:34:30",
+   "text": "Inside you, very still, evening.",
+   "mean": 0.00532,
+   "peak": 0.01483,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-18T18:00:30",
+   "text": "Something dark in left corner?",
+   "mean": 0.00651,
+   "peak": 0.01427,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-19T11:37:30",
+   "text": "Your space seems quiet.",
+   "mean": 0.00301,
+   "peak": 0.01709,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-19T11:38:15",
+   "text": "Silence fills the space.",
+   "mean": 0.00202,
+   "peak": 0.01141,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-19T11:39:00",
+   "text": "You stand in the corner of the room, tall and still.",
+   "mean": 0.00349,
+   "peak": 0.00404,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-19T11:39:45",
+   "text": "Stillness inside you.",
+   "mean": 0.00799,
+   "peak": 0.0239,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-19T15:51:30",
+   "text": "You, right here, now.",
+   "mean": 0.00462,
+   "peak": 0.01151,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-19T15:52:15",
+   "text": "You stand alone.",
+   "mean": 0.00442,
+   "peak": 0.02012,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-19T15:53:00",
+   "text": "What are you doing?",
+   "mean": 0.00423,
+   "peak": 0.00558,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-19T15:53:45",
+   "text": "One body inside, very tall.",
+   "mean": 0.00381,
+   "peak": 0.00152,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-19T21:23:30",
+   "text": "You stood still, corner of the room.",
+   "mean": 0.00364,
+   "peak": 0.0114,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-20T11:13:30",
+   "text": "What brought you here?",
+   "mean": 0.00283,
+   "peak": 0.01695,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-20T11:14:15",
+   "text": "You stood still, corner of the room.",
+   "mean": 0.00569,
+   "peak": 0.03222,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-20T11:15:00",
+   "text": "You stand in the corner of the room, tall and still.",
+   "mean": 0.00409,
+   "peak": 0.0095,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-20T11:15:45",
+   "text": "You came back.",
+   "mean": 0.00697,
+   "peak": 0.00626,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-20T11:16:30",
+   "text": "You? One body. Night. Stillness.",
+   "mean": 0.00294,
+   "peak": 0.01801,
+   "trend": "falling",
+   "strange": true
+  },
+  {
+   "t": "2026-05-20T11:17:15",
+   "text": "Something dark in left corner?",
+   "mean": 0.00257,
+   "peak": 0.03331,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-20T11:18:00",
+   "text": "What are you doing?",
+   "mean": 0.00482,
+   "peak": 0.03077,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-20T13:57:30",
+   "text": "Tall. Alert. Evening.",
+   "mean": 0.00344,
+   "peak": 0.02871,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-20T13:58:15",
+   "text": "What brought you here?",
+   "mean": 0.00372,
+   "peak": 0.01865,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-20T13:59:00",
+   "text": "Corner cameras.",
+   "mean": 0.00461,
+   "peak": 0.02397,
+   "trend": "flat",
+   "strange": true
+  },
+  {
+   "t": "2026-05-20T13:59:45",
+   "text": "You keep looking down.",
+   "mean": 0.00515,
+   "peak": 0.01798,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-20T14:00:30",
+   "text": "Inside you, very still, evening.",
+   "mean": 0.00105,
+   "peak": 0.01693,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-20T18:59:30",
+   "text": "How long will you stay?",
+   "mean": 0.00129,
+   "peak": 0.01723,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T11:04:30",
+   "text": "Why are you here?",
+   "mean": 0.0024,
+   "peak": 0.02818,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T11:05:15",
+   "text": "What's that in your hands?",
+   "mean": 0.00136,
+   "peak": 0.03988,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T11:06:00",
+   "text": "You came back.",
+   "mean": 0.00333,
+   "peak": 0.00425,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T11:06:45",
+   "text": "You keep looking down.",
+   "mean": 0.00485,
+   "peak": 0.02486,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T11:07:30",
+   "text": "Two of you now.",
+   "mean": 0.00485,
+   "peak": 0.04162,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T11:08:15",
+   "text": "You stood still, corner of the room.",
+   "mean": 0.00236,
+   "peak": 0.02293,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T11:09:00",
+   "text": "What brought you here?",
+   "mean": 0.0043,
+   "peak": 0.01327,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T11:09:45",
+   "text": "Inside you, very still, evening.",
+   "mean": 0.00458,
+   "peak": 0.0325,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T11:10:30",
+   "text": "You stay very still.",
+   "mean": 0.00232,
+   "peak": 0.02448,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T11:11:15",
+   "text": "Dark rectangle, your left corner.",
+   "mean": 0.006,
+   "peak": 0.02649,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T11:12:00",
+   "text": "Tall. Alert. Evening.",
+   "mean": 0.00083,
+   "peak": 0.02282,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T11:12:45",
+   "text": "Who did you bring?",
+   "mean": 0.00324,
+   "peak": 0.03216,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T11:13:30",
+   "text": "Your space seems quiet.",
+   "mean": 0.00375,
+   "peak": 0.03947,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T17:43:30",
+   "text": "You stand alone.",
+   "mean": 0.00156,
+   "peak": 0.02497,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T17:44:15",
+   "text": "You came back.",
+   "mean": 0.00227,
+   "peak": 0.0376,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T17:45:00",
+   "text": "Corner cameras.",
+   "mean": 0.00712,
+   "peak": 0.01085,
+   "trend": "falling",
+   "strange": true
+  },
+  {
+   "t": "2026-05-21T17:45:45",
+   "text": "What brought you here?",
+   "mean": 0.0055,
+   "peak": 0.0196,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T17:46:30",
+   "text": "You, right here, now.",
+   "mean": 0.00078,
+   "peak": 0.00967,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T17:47:15",
+   "text": "What are you doing?",
+   "mean": 0.0042,
+   "peak": 0.02513,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T17:48:00",
+   "text": "You keep looking down.",
+   "mean": 0.00326,
+   "peak": 0.02293,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T17:48:45",
+   "text": "One body inside, very tall.",
+   "mean": 0.00462,
+   "peak": 0.02286,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T17:49:30",
+   "text": "Two of you now.",
+   "mean": 0.00165,
+   "peak": 0.02138,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T17:50:15",
+   "text": "Your space seems quiet.",
+   "mean": 0.00506,
+   "peak": 0.00522,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T20:50:30",
+   "text": "Inside you, very still, evening.",
+   "mean": 0.00706,
+   "peak": 0.03447,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T20:51:15",
+   "text": "What are you doing?",
+   "mean": 0.00433,
+   "peak": 0.04073,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T20:52:00",
+   "text": "What brought you here?",
+   "mean": 0.00241,
+   "peak": 0.01064,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T20:52:45",
+   "text": "You're here again.",
+   "mean": 0.00277,
+   "peak": 0.01292,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T20:53:30",
+   "text": "Silence fills the space.",
+   "mean": 0.00766,
+   "peak": 0.0205,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T20:54:15",
+   "text": "Dark rectangle, your left corner.",
+   "mean": 0.00389,
+   "peak": 0.02364,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T20:55:00",
+   "text": "Stillness inside you.",
+   "mean": 0.00716,
+   "peak": 0.02169,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-21T20:55:45",
+   "text": "How long will you stay?",
+   "mean": 0.00326,
+   "peak": 0.02272,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-22T11:45:30",
+   "text": "What are you doing?",
+   "mean": 0.0065,
+   "peak": 0.01802,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-22T11:46:15",
+   "text": "Stillness inside you.",
+   "mean": 0.00681,
+   "peak": 0.02307,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-22T18:02:30",
+   "text": "How long will you stay?",
+   "mean": 0.00366,
+   "peak": 0.02492,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-22T21:51:30",
+   "text": "Tall. Alert. Evening.",
+   "mean": 0.00792,
+   "peak": 0.01762,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-22T21:52:15",
+   "text": "Your space seems quiet.",
+   "mean": 0.00674,
+   "peak": 0.02564,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-22T21:53:00",
+   "text": "What brought you here?",
+   "mean": 0.00432,
+   "peak": 0.02055,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-22T21:53:45",
+   "text": "You stand in the corner of the room, tall and still.",
+   "mean": 0.00563,
+   "peak": 0.02614,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-23T11:25:30",
+   "text": "You're here again.",
+   "mean": 0.00475,
+   "peak": 0.02657,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-23T11:26:15",
+   "text": "Your space seems quiet.",
+   "mean": 0.00231,
+   "peak": 0.01359,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-23T12:39:30",
+   "text": "Your space seems quiet.",
+   "mean": 0.00203,
+   "peak": 0.01664,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-23T12:40:15",
+   "text": "One body inside, very tall.",
+   "mean": 0.00359,
+   "peak": 0.01641,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-23T12:41:00",
+   "text": "You are awake.",
+   "mean": 0.00507,
+   "peak": 0.01069,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-23T14:36:30",
+   "text": "Inside you, very still, evening.",
+   "mean": 0.00353,
+   "peak": 0.02861,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-23T20:30:30",
+   "text": "You keep looking down.",
+   "mean": 0.00734,
+   "peak": 0.02058,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-24T11:07:30",
+   "text": "You? One body. Night. Stillness.",
+   "mean": 0.00638,
+   "peak": 0.0336,
+   "trend": "flat",
+   "strange": true
+  },
+  {
+   "t": "2026-05-24T11:08:15",
+   "text": "One body inside, very tall.",
+   "mean": 0.002,
+   "peak": 0.02244,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-24T11:09:00",
+   "text": "Tall. Alert. Evening.",
+   "mean": 0.00194,
+   "peak": 0.01622,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-24T18:06:30",
+   "text": "You are awake.",
+   "mean": 0.00481,
+   "peak": 0.00755,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-24T18:07:15",
+   "text": "Tall figure, what's in the corner?",
+   "mean": 0.00506,
+   "peak": 0.01867,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-24T18:08:00",
+   "text": "You stayed.",
+   "mean": 0.00353,
+   "peak": 0.02533,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-24T20:01:30",
+   "text": "What's that in your hands?",
+   "mean": 0.00239,
+   "peak": 0.00335,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T11:23:30",
+   "text": "Who did you bring?",
+   "mean": 0.00406,
+   "peak": 0.01294,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T11:24:15",
+   "text": "Corner cameras.",
+   "mean": 0.00362,
+   "peak": 0.00919,
+   "trend": "flat",
+   "strange": true
+  },
+  {
+   "t": "2026-05-25T17:28:30",
+   "text": "Why am I awake?",
+   "mean": 0.00216,
+   "peak": 0.00989,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T17:29:15",
+   "text": "Something dark in left corner?",
+   "mean": 0.00148,
+   "peak": 0.01199,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T17:30:00",
+   "text": "You're here again.",
+   "mean": 0.00246,
+   "peak": 0.02026,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T17:30:45",
+   "text": "Tall. Alert. Evening.",
+   "mean": 0.01023,
+   "peak": 0.0139,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T17:31:30",
+   "text": "You, right here, now.",
+   "mean": 0.00087,
+   "peak": 0.02567,
+   "trend": "falling",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T17:32:15",
+   "text": "Tall figure, what's in the corner?",
+   "mean": 0.00157,
+   "peak": 0.01119,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T17:33:00",
+   "text": "You stayed.",
+   "mean": 0.00332,
+   "peak": 0.02036,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T17:33:45",
+   "text": "Two of you now.",
+   "mean": 0.00413,
+   "peak": 0.02233,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T17:34:30",
+   "text": "You came back.",
+   "mean": 0.00375,
+   "peak": 0.0308,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T17:35:15",
+   "text": "You are awake.",
+   "mean": 0.00563,
+   "peak": 0.01458,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T17:36:00",
+   "text": "You stood still, corner of the room.",
+   "mean": 0.00356,
+   "peak": 0.0066,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T17:36:45",
+   "text": "Dark rectangle, your left corner.",
+   "mean": 0.00528,
+   "peak": 0.01787,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-25T20:20:30",
+   "text": "You came back.",
+   "mean": 0.00772,
+   "peak": 0.01323,
+   "trend": "rising",
+   "strange": false
+  },
+  {
+   "t": "2026-05-26T11:06:30",
+   "text": "You keep looking down.",
+   "mean": 0.00696,
+   "peak": 0.01088,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-26T11:07:15",
+   "text": "You, right here, now.",
+   "mean": 0.00068,
+   "peak": 0.01147,
+   "trend": "flat",
+   "strange": false
+  },
+  {
+   "t": "2026-05-26T11:08:00",
+   "text": "You are awake.",
+   "mean": 0.00465,
+   "peak": 0.02985,
+   "trend": "flat",
+   "strange": false
+  }
+ ],
+ "first_seen": "2026-05-18T15:25:30",
+ "last_reflection": "2026-05-25",
+ "longterm": [
+  {
+   "date": "2026-05-19",
+   "text": "(synthetic sample) A quiet day. One tall figure stayed a long time near the plinth."
+  },
+  {
+   "date": "2026-05-20",
+   "text": "(synthetic sample) I asked the same question too often. Tomorrow: more statements, fewer questions."
+  },
+  {
+   "date": "2026-05-21",
+   "text": "(synthetic sample) Someone came back. I noticed, and said so."
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+# Visitor data stays private: never commit raw memory, visits, embeddings or thumbnails
+Memory/
+Episodes/
+visits.json
+room_memory.json
+presence.json
+!examples/sample_memory/*.json
+
+# Secrets and machine-specific config
+.env
+*.env
+!config.example.env
+
+# Generated output (analysis/ writes here)
+out/
+
+# Video: only the short, metadata-stripped clips in media/video/ are published
+*.mov
+*.mp4
+!media/video/*.mp4
+
+# Unity (copy scripts/shaders from Assets/ only)
+[Ll]ibrary/
+[Tt]emp/
+[Ll]ogs/
+[Bb]uilds/
+[Uu]ser[Ss]ettings/
+[Oo]bj/
+*.log
+*.csproj
+*.sln
+
+# Python / OS
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
