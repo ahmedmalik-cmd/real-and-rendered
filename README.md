@@ -79,6 +79,8 @@ How the prompt got there, in fifteen phases: **[docs/prompt_evolution.md](docs/p
 | ![Dwell time](charts/03_dwell_distribution.png) | ![Voice modes](charts/08_voice_modes_pie.png) |
 | How long visitors stayed | The shapes of the room's voice |
 
+*The charts are drawn from the complete log, which runs to 30 May: the system kept running for four days after the exhibition closed, so their counts (e.g. 121 visits) are higher than the exhibition figures at the top of this page.*
+
 What the room said, curated by theme: **[docs/the_room_speaks.md](docs/the_room_speaks.md)** · one-page overview: **[docs/one_pager.md](docs/one_pager.md)**
 
 ## Gallery
@@ -94,7 +96,7 @@ What the room said, curated by theme: **[docs/the_room_speaks.md](docs/the_room_
 
 ```
 docs/        architecture, engineering log, prompt evolution, one-pager, curated transcript
-src/         installation source: Unity (C#) and Python; see src/README.md
+src/         installation source: Unity (C#) and Python, being added; see src/README.md
 analysis/    turns the run's memory into charts, a full Markdown export and video collages
 examples/    a synthetic memory folder (same shape as the real one) to run the analysis on
 charts/      the eight charts from the real run
