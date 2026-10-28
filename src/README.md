@@ -27,6 +27,8 @@ src/
     Editor/SceneSetup.cs                           builds the scene's object graph from a menu item
     Shaders/PointCloud.shader, QuadWarp.shader     point-cloud rendering and projector keystone warp
     StreamingAssets/CalibrationData/calibration.json  the two Kinects' poses (position/rotation only)
+  kinect-bridge/             ThereminKinectBridge: reads both Kinect v1 sensors and serves depth, colour and
+                             skeleton/face data over HTTP at localhost:8182 (Program.cs, KinectBridge.csproj)
   scripts/                   Windows launchers with auto-restart (launch_all.bat starts everything in order)
 ```
 
@@ -41,8 +43,6 @@ See [`../docs/architecture.md`](../docs/architecture.md) for how the pieces conn
 - **`tribe_server.py`** (TRIBE v2 brain-encoder server, POST /predict, port 8000). It is on the RTX 3090 PC
   or a backup drive, not on the installation PC. Until it is added, `tribe_kinect_client.py` runs in
   "LLaVA-only" mode when it can't reach TRIBE.
-- **Kinect bridge** (`ThereminKinectBridge.exe`, serves depth + colour at localhost:8182), which Unity and the
-  perception loop both read. Its source is a separate project and is not included.
 - **Kinect SDK DLLs** for `Assets/Plugins/`, which come from the Kinect for Windows SDK and aren't redistributed here.
 - No compute shaders: the point cloud is drawn by `PointCloud.shader` alone.
 
@@ -61,6 +61,9 @@ python src/python/tribe_server.py       # port 8000 (not in the repo yet)
 **Installation PC** (Kinects, Theremini, projectors, Ollama, Unity build)
 
 1. `pip install -r src/python/requirements.txt`; install [Ollama](https://ollama.com) and `ollama pull llava`.
+   Install the Kinect for Windows SDK 1.8 and Developer Toolkit 1.8 (default `C:\Program Files` locations,
+   which `KinectBridge.csproj` references), then build the bridge (x64 Release, .NET Framework 4.8):
+   `msbuild src/kinect-bridge/KinectBridge.csproj` → `src/kinect-bridge/bin/Release/ThereminKinectBridge.exe`.
 2. Set the variables from [`config.example.env`](config.example.env) (at least `TRIBE_URL` and `CLIP_URL`
    pointing at the 3090 PC), plus `BUILD_EXE` / `BRIDGE_EXE` if your build and Kinect bridge live elsewhere.
 3. Build the Unity project (Unity 2022.3) with these `Assets/` files, then run `src/scripts/launch_all.bat`.
