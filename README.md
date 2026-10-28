@@ -96,13 +96,32 @@ What the room said, curated by theme: **[docs/the_room_speaks.md](docs/the_room_
 
 ```
 docs/        architecture, engineering log, prompt evolution, one-pager, curated transcript
-src/         installation source: Unity (C#) and Python, being added; see src/README.md
+src/         the installation's source; see src/README.md
+  python/        perception loop, CLIP server, Theremini bridge, memory inspector
+  unity/Assets/  Unity 2022.3 scripts and shaders: dual-Kinect merge, depth post-processing,
+                 projector calibration and warp, captions, presence
+  kinect-bridge/ C# (.NET Framework 4.8) service serving both Kinects' depth + colour over HTTP
+  scripts/       Windows launchers with auto-restart
 analysis/    turns the run's memory into charts, a full Markdown export and video collages
 examples/    a synthetic memory folder (same shape as the real one) to run the analysis on
 charts/      the eight charts from the real run
 media/       stills, installation photos, process screenshots, short clips
 tools/       privacy_check.py: scans for IPs, personal paths, keys and photo/video metadata
 ```
+
+### Try the room with a webcam
+
+The perception loop runs without the installation: it needs [Ollama](https://ollama.com) with LLaVA and a webcam
+(or a video file). The Kinects, Unity, TRIBE and CLIP are optional; without them it runs LLaVA-only.
+
+```bash
+cd src/python && pip install -r requirements.txt && ollama pull llava
+ROOM_CAMERA=0 ROOM_DATA_DIR=./room-data python tribe_kinect_client.py
+```
+
+It speaks a line every 30 s or so and keeps its memory in `./room-data` (git-ignored). More in
+[src/python/README.md](src/python/README.md#try-it-without-the-installation). Still to be added from the GPU machine:
+`tribe_server.py`, the TRIBE v2 server.
 
 ### Run the analysis
 
@@ -111,14 +130,14 @@ The real memory is private, so the repo ships a synthetic one with the same stru
 ```bash
 pip install -r requirements.txt
 ROOM_MEMORY_DIR=examples/sample_memory python analysis/visualize.py        # → out/charts/
-ROOM_MEMORY_DIR=examples/sample_memory python analysis/document_export.py  # → Markdown export
+ROOM_MEMORY_DIR=examples/sample_memory python analysis/document_export.py  # → out/room_documentation_*.md
 ```
 
 On the installation PC the scripts read Unity's data folder directly when `ROOM_MEMORY_DIR` is not set.
 
 ## Stack
 
-Unity 2022.3 (C#, custom compute + shaders) · Python · Kinect v1 × 2 · TRIBE v2 · open_clip ViT-B-32 · MediaPipe · Ollama / LLaVA · OSC + MIDI (Moog Theremini) · three projectors
+Unity 2022.3 (C#, custom point-cloud shader) · C# / .NET (Kinect bridge) · Python · FastAPI · Kinect v1 × 2 · TRIBE v2 · open_clip ViT-B-32 · MediaPipe · Ollama / LLaVA · OSC + MIDI (Moog Theremini) · three projectors
 
 ## Privacy
 

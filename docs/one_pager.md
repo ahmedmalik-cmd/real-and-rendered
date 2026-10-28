@@ -70,7 +70,7 @@ not to ask the same question twice. Sometimes it doesn't speak at all.
 |---|---|
 | **Sensors** | Two Microsoft Kinect v1, opposing corners |
 | **Display** | 3 projectors (2 × point cloud, 1 × caption) |
-| **Point cloud pipeline** | Unity, custom compute + shader, depth post-processing, persistent background plate |
+| **Point cloud pipeline** | Unity, custom point-cloud shader, depth post-processing, persistent background plate |
 | **Brain encoder** | TRIBE v2 on RTX 3090, predicting cortical activation from 2-second video clips |
 | **Image recall** | open_clip ViT-B-32 on the same GPU, 512-d embeddings per visit |
 | **Vision-language** | Local LLaVA via Ollama on the installation PC |

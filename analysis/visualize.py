@@ -22,7 +22,7 @@ straight into a slide deck or the website.
 """
 import os, re, json, math
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime
 from collections import Counter, defaultdict
 
 try:

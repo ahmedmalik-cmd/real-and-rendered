@@ -44,6 +44,7 @@ _latest_pose = {
     "hands":  None,   # "down" | "left raised" | "right raised" | "both raised" | "out" | None
     "motion": None,   # "still" | "slight" | "active"
     "ts":     0.0,
+    "seen":   0.0,    # last time a face or body was detected (presence in demo mode)
 }
 
 # Set on visit arrival, cleared on departure — lets ask_llava know how long the
@@ -56,9 +57,13 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 TRIBE_SERVER = os.environ.get("TRIBE_URL", "http://localhost:8000").rstrip("/")
 # Set TRIBE_URL to the GPU PC (LAN address, or an ngrok https URL if the LAN
 # route is blocked by that PC's firewall or by network client-isolation).
-BRIDGE_URL      = "http://localhost:8182"
+BRIDGE_URL      = os.environ.get("BRIDGE_URL", "http://localhost:8182").rstrip("/")
+# Demo mode: watch a webcam ("0", "1", ...) or a video file instead of the Kinect bridge.
+# Without Unity's presence.json, someone counts as present while MediaPipe sees a face or body.
+CAMERA_SOURCE   = os.environ.get("ROOM_CAMERA", "").strip()
+DEMO_ABSENT_AFTER = 10.0   # demo mode: seconds without a face or body before the visit ends
 OLLAMA_URL      = os.environ.get("OLLAMA_URL", "http://localhost:11434").rstrip("/") + "/api/generate"
-OLLAMA_MODEL    = "llava"
+OLLAMA_MODEL    = os.environ.get("OLLAMA_MODEL", "llava")
 PERCEPTION_PORT = 8183
 CLIP_SERVER     = os.environ.get("CLIP_URL", "http://localhost:8001").rstrip("/")  # open_clip embedding server on the 3090
 CLIP_SECONDS    = 2     # was 4 — halves capture latency so reactions land sooner
@@ -69,7 +74,9 @@ FRAME_W, FRAME_H = 640, 480
 # Adjust UNITY_COMPANY / UNITY_PRODUCT if your Player Settings differ.
 UNITY_COMPANY  = "DefaultCompany"
 UNITY_PRODUCT  = "DualKinectPointCloud"
-PERSIST_ROOT   = Path(os.environ.get("USERPROFILE", str(Path.home()))) / \
+# ROOM_DATA_DIR overrides it (e.g. ./room-data for a demo run on another machine).
+PERSIST_ROOT   = Path(os.environ["ROOM_DATA_DIR"]) if os.environ.get("ROOM_DATA_DIR") else \
+                 Path(os.environ.get("USERPROFILE", str(Path.home()))) / \
                  "AppData" / "LocalLow" / UNITY_COMPANY / UNITY_PRODUCT
 MEMORY_DIR     = PERSIST_ROOT / "Memory"
 MEMORY_FILE    = MEMORY_DIR / "room_memory.json"
@@ -376,6 +383,13 @@ def read_presence():
                 _LAST_PRESENCE_WARNED = time.time()
             with PRESENCE_FILE.open("r", encoding="utf-8") as f:
                 return json.load(f)
+        elif CAMERA_SOURCE:
+            # Demo mode: someone is here while MediaPipe has seen a face or body in the last
+            # DEMO_ABSENT_AFTER seconds, so visits end and returns can be recognised.
+            if not _MP_OK:
+                return {"present": True, "person_count": 1}
+            here = time.time() - _latest_pose["seen"] < DEMO_ABSENT_AFTER
+            return {"present": here, "person_count": int(here)}
         else:
             if time.time() - _LAST_PRESENCE_WARNED > 60:
                 print(f"[Presence] WARNING: no presence file at {PRESENCE_FILE}")
@@ -530,7 +544,36 @@ def is_strange_moment(peak):
     return high_peak or (random.random() < STRANGE_BASE_PROB)
 
 # ── Pull a single JPEG frame from bridge ──────────────────────────────────────
+_camera    = None
+_camera_t0 = 0.0
+
+def _pull_camera_frame():
+    """Demo mode: current frame from a webcam index, or from a video file played in real time (looping)."""
+    global _camera, _camera_t0
+    if _camera is None:
+        _camera = cv2.VideoCapture(int(CAMERA_SOURCE) if CAMERA_SOURCE.isdigit() else CAMERA_SOURCE)
+        if not _camera.isOpened():
+            print(f"[Camera] cannot open ROOM_CAMERA={CAMERA_SOURCE!r}")
+            _camera = None
+            return None
+        _camera_t0 = time.time()
+    if not CAMERA_SOURCE.isdigit():
+        # The loop reads ~8 frames/s with gaps between clips; skip ahead so the file keeps wall-clock time.
+        fps  = _camera.get(cv2.CAP_PROP_FPS) or 30.0
+        n    = max(int(_camera.get(cv2.CAP_PROP_FRAME_COUNT)), 1)
+        want = int((time.time() - _camera_t0) * fps) % n
+        pos  = int(_camera.get(cv2.CAP_PROP_POS_FRAMES))
+        if want < pos:                                     # looped past the end: start again
+            _camera.set(cv2.CAP_PROP_POS_FRAMES, want)
+        else:
+            for _ in range(want - pos):
+                _camera.grab()
+    ok, frame = _camera.read()
+    return cv2.resize(frame, (FRAME_W, FRAME_H)) if ok else None
+
 def pull_frame():
+    if CAMERA_SOURCE:
+        return _pull_camera_frame()
     try:
         r = requests.get(f"{BRIDGE_URL}/color.jpg", timeout=2)
         if r.status_code == 200 and r.content:
@@ -713,18 +756,6 @@ def ask_llava(tribe_result, frame, memory):
     else:
         _IDLE_CYCLES = 0
     idle = presence_now and _IDLE_CYCLES >= 3 and norm_var < 0.62
-
-    # Previous thoughts block
-    prev = memory["history"][-MEMORY_PROMPT_WINDOW:]
-    if prev:
-        lines = []
-        for i, p in enumerate(prev, 1):
-            t = p.get("t", "")
-            txt = p.get("text", "").strip().replace("\n", " ")
-            lines.append(f"  {i}. \"{txt}\"")
-        prev_block = "Your recent thoughts (oldest to newest):\n" + "\n".join(lines)
-    else:
-        prev_block = "You have no previous thoughts. This is the beginning."
 
     # Total memory age (for a sense of how long the room has been awake)
     total = len(memory["history"])
@@ -1139,6 +1170,8 @@ def _pose_worker():
                 _latest_pose["hands"]  = hands_state
                 _latest_pose["motion"] = motion_state
                 _latest_pose["ts"]     = time.time()
+                if fres.multi_face_landmarks or pres.pose_landmarks:
+                    _latest_pose["seen"] = time.time()
         except Exception as e:
             print(f"[Pose] worker error: {e}")
             time.sleep(1)
@@ -1175,8 +1208,7 @@ def _tribe_worker(frames):
     global _tribe_inflight, _latest_tribe, TRIBE_OK, LAST_TRIBE_RETRY
     tmp_name = None
     try:
-        tmp = tempfile.NamedTemporaryFile(suffix=".mp4", delete=False,
-                                          dir=str(Path.home() / "Downloads"))
+        tmp = tempfile.NamedTemporaryFile(suffix=".mp4", delete=False)
         tmp.close()
         tmp_name = tmp.name
         frames_to_video(frames, tmp_name)
@@ -1337,7 +1369,7 @@ def perception_loop():
             last_emit_at = time.time()
             tag = "[strange] " if strange else ""
             print(f"\n[Perception] {tag}{text}\n    (memory={len(memory['history'])})\n")
-        else:
+        elif run_llava:
             print("[Perception] (empty response)")
 
         # ── Visit end — finalise the episode into the memory bank ────────────
@@ -1368,19 +1400,24 @@ LAST_TRIBE_RETRY    = 0.0   # epoch seconds
 TRIBE_RETRY_PERIOD  = 60.0  # try TRIBE health again every minute when down
 
 if __name__ == "__main__":
-    try:
-        r = requests.get(f"{BRIDGE_URL}/", timeout=5)
-        print(f"[Bridge] {r.json()}")
-    except Exception as e:
-        print(f"[Bridge] Cannot reach Kinect bridge: {e}")
-        exit(1)
+    if CAMERA_SOURCE:
+        print(f"[Camera] demo mode — watching ROOM_CAMERA={CAMERA_SOURCE!r} instead of the Kinect bridge")
+    else:
+        try:
+            r = requests.get(f"{BRIDGE_URL}/", timeout=5)
+            print(f"[Bridge] {r.json()}")
+        except Exception as e:
+            print(f"[Bridge] Cannot reach Kinect bridge: {e}  (set ROOM_CAMERA=0 to try it with a webcam)")
+            raise SystemExit(1)
 
     # TRIBE health is non-fatal — if it's down, we run LLaVA-only and keep
     # re-checking. ngrok rotation / second-PC sleep / network blips no longer
     # crash the whole pipeline.
     TRIBE_OK = check_tribe_health()
     LAST_TRIBE_RETRY = time.time()
-    if not TRIBE_OK:
+    if not TRIBE_OK and CAMERA_SOURCE:
+        print("[TRIBE] not reachable — running LLaVA-only (TRIBE is optional in demo mode).")
+    elif not TRIBE_OK:
         print("[TRIBE] DEGRADED — running LLaVA-only. Will retry health every "
               f"{int(TRIBE_RETRY_PERIOD)}s. Things to check on the other PC:")
         print("        · tribe_server.py running?  'Model ready' printed?")

@@ -1,8 +1,10 @@
+# Installation PC (Python 3.9–3.12)
+# theremini_bridge.py, perception_pipeline.py
 mido>=1.3.0
 python-rtmidi>=1.5.0
 python-osc>=1.8.0
 requests>=2.31.0
-# tribe_kinect_client.py (installation PC)
+# tribe_kinect_client.py
 numpy
 opencv-python
-mediapipe
+mediapipe>=0.10.14,<=0.10.21   # newer releases dropped the `solutions` API used for face + pose

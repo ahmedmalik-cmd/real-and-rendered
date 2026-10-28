@@ -5,12 +5,11 @@ Walks room_memory.json + visits.json + Episodes/ thumbnails and produces a
 single dated Markdown document covering everything the piece thought, every
 visit it recorded, every nightly reflection, since the install began.
 
-Run from the Python/ folder:
-    python document_export.py                    → ./room_documentation_<from>_to_<to>.md
-    python document_export.py -o my_report.md    → custom output path
-    python document_export.py --txt              → also write a plain .txt copy
-    python document_export.py --visits-only      → skip the full chronological dump
-    python document_export.py --since 2026-05-22 → only include data from that date forward
+    python analysis/document_export.py                    → out/room_documentation_<from>_to_<to>.md
+    python analysis/document_export.py -o my_report.md    → custom output path
+    python analysis/document_export.py --txt              → also write a plain .txt copy
+    python analysis/document_export.py --visits-only      → skip the full chronological dump
+    python analysis/document_export.py --since 2026-05-22 → only include data from that date forward
 
 Sections in the output:
   1. Header — date range, totals.
@@ -93,7 +92,7 @@ def fence(s):
 
 def main():
     ap = argparse.ArgumentParser(description="Export the room's history as Markdown.")
-    ap.add_argument("-o", "--out", help="output Markdown path (default auto-named in CWD)")
+    ap.add_argument("-o", "--out", help="output Markdown path (default: auto-named in out/)")
     ap.add_argument("--txt", action="store_true", help="also emit a plain-text copy")
     ap.add_argument("--visits-only", action="store_true",
                     help="skip the full chronological dump (section 3)")
@@ -136,7 +135,8 @@ def main():
     else:
         a = (first_ts or datetime.now()).strftime("%Y-%m-%d")
         b = (last_ts  or datetime.now()).strftime("%Y-%m-%d")
-        out_md = Path.cwd() / f"room_documentation_{a}_to_{b}.md"
+        REPO_OUT.mkdir(parents=True, exist_ok=True)
+        out_md = REPO_OUT / f"room_documentation_{a}_to_{b}.md"
 
     finished    = [v for v in visits if v.get("departed")]
     total_dwell = sum(int(v.get("duration_sec", 0) or 0) for v in finished)

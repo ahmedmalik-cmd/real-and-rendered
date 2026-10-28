@@ -1,7 +1,8 @@
 """
 Read-only inspector for the room's accumulated thoughts.
 
-Reads:  %USERPROFILE%/AppData/LocalLow/<Company>/<Product>/Memory/room_memory.json
+Reads:  room_memory.json + visits.json from $ROOM_MEMORY_DIR, $ROOM_DATA_DIR/Memory, or Unity's
+        %USERPROFILE%/AppData/LocalLow/<Company>/<Product>/Memory on the installation PC
 Writes: nothing — safe to run anytime, even while the room is running.
 
 Usage:
@@ -26,9 +27,15 @@ from pathlib import Path
 
 UNITY_COMPANY = "DefaultCompany"
 UNITY_PRODUCT = "DualKinectPointCloud"
-MEMORY_DIR  = (Path(os.environ.get("USERPROFILE", str(Path.home())))
-               / "AppData" / "LocalLow" / UNITY_COMPANY / UNITY_PRODUCT
-               / "Memory")
+# $ROOM_MEMORY_DIR (the Memory folder itself), else $ROOM_DATA_DIR/Memory (as tribe_kinect_client.py uses),
+# else Unity's persistentDataPath on the installation PC.
+if os.environ.get("ROOM_MEMORY_DIR"):
+    MEMORY_DIR = Path(os.environ["ROOM_MEMORY_DIR"])
+elif os.environ.get("ROOM_DATA_DIR"):
+    MEMORY_DIR = Path(os.environ["ROOM_DATA_DIR"]) / "Memory"
+else:
+    MEMORY_DIR = (Path(os.environ.get("USERPROFILE", str(Path.home())))
+                  / "AppData" / "LocalLow" / UNITY_COMPANY / UNITY_PRODUCT / "Memory")
 MEMORY_PATH = MEMORY_DIR / "room_memory.json"
 VISITS_PATH = MEMORY_DIR / "visits.json"
 

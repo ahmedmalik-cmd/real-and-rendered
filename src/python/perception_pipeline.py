@@ -130,10 +130,10 @@ def main():
     if args.frame == DEFAULT_FRAME and not os.path.exists(frame_path) \
        and os.path.exists(LEGACY_FRAME):
         frame_path = os.path.abspath(LEGACY_FRAME)
-        print(f"[Perception] Default path missing — using legacy location.")
+        print("[Perception] Default path missing — using legacy location.")
     print(f"[Perception] Watching frame: {frame_path}")
     if not os.path.exists(frame_path):
-        print(f"[Perception] (file doesn't exist yet — Unity will create it on first capture)")
+        print("[Perception] (file doesn't exist yet — Unity will create it on first capture)")
     print(f"[Perception] OSC → {args.osc_host}:{args.osc_port}")
     print(f"[Perception] Model: {args.model}   interval ≥ {args.interval}s")
     print(f"[Perception] Prompt:\n---\n{prompt}\n---")

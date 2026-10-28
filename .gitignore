@@ -29,6 +29,7 @@ out/
 *.log
 *.csproj
 *.sln
+!src/kinect-bridge/KinectBridge.csproj
 
 # Python / OS
 __pycache__/
@@ -36,3 +37,6 @@ __pycache__/
 .venv/
 venv/
 .DS_Store
+
+# Local demo runs of the perception loop (memory + thumbnails of whoever the camera sees)
+room-data/

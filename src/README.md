@@ -46,7 +46,18 @@ See [`../docs/architecture.md`](../docs/architecture.md) for how the pieces conn
 - **Kinect SDK DLLs** for `Assets/Plugins/`, which come from the Kinect for Windows SDK and aren't redistributed here.
 - No compute shaders: the point cloud is drawn by `PointCloud.shader` alone.
 
-## How to run
+## Try it without the installation
+
+The perception loop runs on any machine with [Ollama](https://ollama.com) + LLaVA and a webcam (or a video file):
+
+```bash
+cd src/python && pip install -r requirements.txt && ollama pull llava
+ROOM_CAMERA=0 ROOM_DATA_DIR=./room-data python tribe_kinect_client.py
+```
+
+The Kinects, Unity, TRIBE and CLIP are optional; details in [`python/README.md`](python/README.md#try-it-without-the-installation).
+
+## How to run the installation
 
 Two machines, on the same network.
 
@@ -74,7 +85,9 @@ Ports: Kinect bridge 8182, perception JSON 8183, Unity OSC 9000, Ollama 11434, T
 The room's memory (`Memory/`, `Presence/`) is written under Unity's `Application.persistentDataPath`
 (`%USERPROFILE%\AppData\LocalLow\DefaultCompany\DualKinectPointCloud` on Windows) and never into the repo.
 
-## Before adding code
+## Adding code
+
+For the parts still to come (and anything else), the same rules applied to everything above:
 
 1. **No addresses in code.** Read machine addresses from the environment, not literals:
 
