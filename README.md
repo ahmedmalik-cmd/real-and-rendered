@@ -115,11 +115,14 @@ The perception loop runs without the installation: it needs [Ollama](https://oll
 (or a video file). The Kinects, Unity, TRIBE and CLIP are optional; without them it runs LLaVA-only.
 
 ```bash
-cd src/python && pip install -r requirements.txt && ollama pull llava
+cd src/python
+python3.12 -m venv .venv && source .venv/bin/activate     # Python 3.9–3.12 (MediaPipe has no 3.13+ build)
+pip install -r requirements.txt && ollama pull llava
 ROOM_CAMERA=0 ROOM_DATA_DIR=./room-data python tribe_kinect_client.py
 ```
 
-It speaks a line every 30 s or so and keeps its memory in `./room-data` (git-ignored). More in
+It speaks a line every 30 s or so and keeps its memory in `./room-data` (git-ignored). On a Mac, allow the
+terminal to use the camera when asked. More in
 [src/python/README.md](src/python/README.md#try-it-without-the-installation). Still to be added from the GPU machine:
 `tribe_server.py`, the TRIBE v2 server.
 

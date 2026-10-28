@@ -20,7 +20,8 @@ pip install -r requirements.txt          # installation PC (Python 3.9–3.12)
 pip install -r requirements-gpu.txt      # GPU PC; install PyTorch for your CUDA version first
 ```
 
-MediaPipe is pinned to `0.10.x`: newer releases dropped the `solutions` API the face and pose tracking uses.
+MediaPipe is pinned to `0.10.x`: newer releases dropped the `solutions` API the face and pose tracking uses, and
+0.10.x has no build for Python 3.13+, so make the environment with 3.12 or older (`python3.12 -m venv .venv`).
 `python-rtmidi` may need a C++ toolchain on Windows; `pip install --only-binary :all: python-rtmidi` avoids it.
 
 ## Try it without the installation
@@ -34,7 +35,8 @@ ROOM_CAMERA=0 ROOM_DATA_DIR=./room-data python tribe_kinect_client.py      # 0 =
 ROOM_CAMERA=../../media/video/perceive.mp4 ROOM_DATA_DIR=./room-data python tribe_kinect_client.py   # or a video file
 ```
 
-(Windows PowerShell: `$env:ROOM_CAMERA="0"; $env:ROOM_DATA_DIR=".\room-data"; python tribe_kinect_client.py`.)
+(Windows PowerShell: `$env:ROOM_CAMERA="0"; $env:ROOM_DATA_DIR=".\room-data"; python tribe_kinect_client.py`. On a Mac,
+allow the terminal to use the camera when macOS asks.)
 
 Someone counts as present while MediaPipe sees a face or body; step out of view for about 10 s and the visit ends,
 come back and the room may recognize you. It speaks a line every 30 s or so, in the terminal and at

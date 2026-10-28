@@ -51,7 +51,9 @@ See [`../docs/architecture.md`](../docs/architecture.md) for how the pieces conn
 The perception loop runs on any machine with [Ollama](https://ollama.com) + LLaVA and a webcam (or a video file):
 
 ```bash
-cd src/python && pip install -r requirements.txt && ollama pull llava
+cd src/python
+python3.12 -m venv .venv && source .venv/bin/activate     # Python 3.9–3.12 (MediaPipe has no 3.13+ build)
+pip install -r requirements.txt && ollama pull llava
 ROOM_CAMERA=0 ROOM_DATA_DIR=./room-data python tribe_kinect_client.py
 ```
 
