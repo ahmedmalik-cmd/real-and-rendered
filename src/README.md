@@ -1,27 +1,75 @@
 # src/
 
-The installation's runtime source. **Not added yet:** it lives on the two Windows machines
-that ran the piece (the installation PC and the RTX 3090 PC) and will be copied in from there.
+The installation's runtime source, copied from the installation PC and cleaned for release
+(machine addresses moved to environment variables, personal paths made relative).
 
-## What goes here
+## What's here
 
 ```
 src/
+  config.example.env         environment variables (TRIBE_URL, CLIP_URL, OLLAMA_URL, ...)
   python/
     tribe_kinect_client.py   perception loop: clip producer, async TRIBE worker, MediaPipe pose worker,
                              CLIP recall, prompt assembly, LLaVA via Ollama, memory writes, nightly reflection
-    tribe_server.py          TRIBE v2 brain-encoder server (POST /predict, port 8000; RTX 3090 PC)
     clip_server.py           open_clip ViT-B-32 embedding server (POST /embed, port 8001; RTX 3090 PC)
     theremini_bridge.py      Moog Theremini MIDI (CC20 pitch, CC2 volume) → OSC → Unity
-  unity/
-    BridgePointCloudManager.cs   dual-Kinect merge, depth post-processing, background plate, presence
-    CaptionProjector.cs          the room's line on the third wall (screen-space overlay, fades)
-    PerceptionReceiver.cs        receives the perception loop's output in Unity
-    ProjectorCalibrator.cs       in-piece projector calibration
-    (shaders / compute)          the point-cloud shader and compute kernels
+    perception_pipeline.py   earlier, simpler LLaVA loop (Unity frame.jpg → Ollama → OSC); see python/README.md
+    memory_inspector.py      prints a summary of the room's memory files (reads them locally, writes nothing)
+    requirements.txt         installation PC; requirements-gpu.txt for the RTX 3090 PC
+  unity/Assets/              scripts and shaders from the Unity 2022.3 project "DualKinectPointCloud"
+    Scripts/Bridge/BridgePointCloudManager.cs      dual-Kinect merge, depth post-processing, background plate, presence
+    Scripts/Projection/CaptionProjector.cs         the room's line on the third wall (screen-space overlay, fades)
+    Scripts/Perception/PerceptionReceiver.cs       receives perception output over OSC
+    Scripts/Perception/TribePerceptionReceiver.cs  polls tribe_kinect_client.py (localhost:8183/perception)
+    Scripts/Projection/ProjectorCalibrator.cs      in-piece projector calibration
+    Scripts/...                                    background model, calibration, OSC, point cloud,
+                                                   post-processing, projection warp, Theremini input
+    Editor/SceneSetup.cs                           builds the scene's object graph from a menu item
+    Shaders/PointCloud.shader, QuadWarp.shader     point-cloud rendering and projector keystone warp
+    StreamingAssets/CalibrationData/calibration.json  the two Kinects' poses (position/rotation only)
+  scripts/                   Windows launchers with auto-restart (launch_all.bat starts everything in order)
 ```
 
+`.meta` files are kept so Unity keeps the script GUIDs. The scene (`main.unity`), materials and the
+room's 3D scan (`usdan_space.fbx`) are not included; `Editor/SceneSetup.cs` expects the FBX at
+`Assets/Models/usdan_space.fbx`.
+
 See [`../docs/architecture.md`](../docs/architecture.md) for how the pieces connect.
+
+## Still missing
+
+- **`tribe_server.py`** (TRIBE v2 brain-encoder server, POST /predict, port 8000). It is on the RTX 3090 PC
+  or a backup drive, not on the installation PC. Until it is added, `tribe_kinect_client.py` runs in
+  "LLaVA-only" mode when it can't reach TRIBE.
+- **Kinect bridge** (`ThereminKinectBridge.exe`, serves depth + colour at localhost:8182), which Unity and the
+  perception loop both read. Its source is a separate project and is not included.
+- **Kinect SDK DLLs** for `Assets/Plugins/`, which come from the Kinect for Windows SDK and aren't redistributed here.
+- No compute shaders: the point cloud is drawn by `PointCloud.shader` alone.
+
+## How to run
+
+Two machines, on the same network.
+
+**RTX 3090 PC** (TRIBE + CLIP)
+
+```bash
+pip install -r src/python/requirements-gpu.txt
+python src/python/clip_server.py        # listens on 0.0.0.0:8001
+python src/python/tribe_server.py       # port 8000 (not in the repo yet)
+```
+
+**Installation PC** (Kinects, Theremini, projectors, Ollama, Unity build)
+
+1. `pip install -r src/python/requirements.txt`; install [Ollama](https://ollama.com) and `ollama pull llava`.
+2. Set the variables from [`config.example.env`](config.example.env) (at least `TRIBE_URL` and `CLIP_URL`
+   pointing at the 3090 PC), plus `BUILD_EXE` / `BRIDGE_EXE` if your build and Kinect bridge live elsewhere.
+3. Build the Unity project (Unity 2022.3) with these `Assets/` files, then run `src/scripts/launch_all.bat`.
+   It starts the Kinect bridge, Ollama, `theremini_bridge.py`, `tribe_kinect_client.py` and the Unity build,
+   each in its own window that restarts on a crash. `install_autostart.bat` adds it to Windows startup.
+
+Ports: Kinect bridge 8182, perception JSON 8183, Unity OSC 9000, Ollama 11434, TRIBE 8000, CLIP 8001.
+The room's memory (`Memory/`, `Presence/`) is written under Unity's `Application.persistentDataPath`
+(`%USERPROFILE%\AppData\LocalLow\DefaultCompany\DualKinectPointCloud` on Windows) and never into the repo.
 
 ## Before adding code
 

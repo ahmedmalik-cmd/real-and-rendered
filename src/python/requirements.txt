@@ -1,0 +1,8 @@
+mido>=1.3.0
+python-rtmidi>=1.5.0
+python-osc>=1.8.0
+requests>=2.31.0
+# tribe_kinect_client.py (installation PC)
+numpy
+opencv-python
+mediapipe

@@ -4,5 +4,5 @@ numpy
 pillow
 # make_collage.py also needs ffmpeg on PATH
 
-# installation runtime (src/python/, once added)
-# torch, open_clip_torch, mediapipe, opencv-python, requests, python-osc, mido
+# installation runtime: see src/python/requirements.txt (installation PC)
+# and src/python/requirements-gpu.txt (RTX 3090 PC)

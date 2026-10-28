@@ -1,0 +1,7 @@
+# clip_server.py (RTX 3090 PC). Install torch for your CUDA version first: https://pytorch.org
+torch
+open_clip_torch
+pillow
+fastapi
+uvicorn
+python-multipart
