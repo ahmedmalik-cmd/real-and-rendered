@@ -151,7 +151,7 @@ flowchart TB
 | **`_clip_producer`** | continuously captures 2 s RGB clips, keeps only the freshest in a maxsize-1 queue, exposes the middle frame to the pose worker | thread |
 | **`_tribe_worker`** | async TRIBE call — never blocks the LLaVA loop | thread |
 | **`_pose_worker`** | MediaPipe Face Mesh + Pose at ~2 Hz; classifies face orientation, hand position, motion, time elapsed | thread |
-| **TRIBE v2 server** | brain-encoding model: predicts cortical activation from a 2 s video clip. Returns per-vertex activation; client averages to scalars | 3090 PC, Python |
+| **TRIBE v2 server** | brain-encoding model: predicts cortical activation from a 2 s video clip. Returns mean activation per timestep and the ten most active vertices; client averages to scalars | 3090 PC, Python |
 | **CLIP server** | open_clip ViT-B-32 image embeddings — 512-d, unit length. Used for visit-to-visit recall | 3090 PC, Python |
 | **Ollama / LLaVA** | vision + language model. Constructs the actual spoken thought from the assembled prompt + the current frame | installation PC, local |
 | **`maybe_nightly_reflection`** | runs once a day at 4 AM with the room empty; summarises the day, names one thing to do differently | called from the perception loop |

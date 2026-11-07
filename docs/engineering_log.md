@@ -93,8 +93,8 @@ stale) brain result instead of blocking. End-to-end latency dropped to
 
 ### 3. The trend bug
 `trend` (rising / flat / falling) was computed by comparing
-`activation[-1]` to `activation[0]` — two *arbitrary cortical
-vertices*. Not a time series. It always read "rising," noise.
+`activation[-1]` to `activation[0]` — the two ends of a *single
+2-second clip*. Not the signal over time. It always read "rising," noise.
 
 Fix: trend now compares the latest mean to the rolling average of the
 last three. A real time series. Suddenly the prompt's "feeling"
@@ -259,8 +259,8 @@ That sentence was the room reading a structured input out loud.
 ## What didn't get fixed in time
 
 - **TRIBE region-mapping (paper-side analysis).** The brain encoder
-  returns a *per-vertex* activation array; the runtime averages it down
-  to one scalar. The discriminative spatial structure is thrown away
+  predicts *per-vertex* activation; the server averages that to one value
+  per timestep, and the runtime averages those down to one scalar. The discriminative spatial structure is thrown away
   every cycle. A version that maps `peak_vertices` to anatomical
   regions and uses that as an additional prompt input is the work for
   the paper, not this run.

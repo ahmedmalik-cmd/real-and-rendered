@@ -7,7 +7,7 @@ servers, which run on a second machine on the same network.
 |---|---|---|
 | `tribe_kinect_client.py` | installation PC | the perception loop: 2 s clips from the Kinect bridge, async TRIBE v2 call, MediaPipe face + pose, CLIP recall, prompt assembly, LLaVA via Ollama, memory, nightly reflection; serves the latest thought as JSON on `localhost:8183/perception` for Unity |
 | `clip_server.py` | GPU PC | open_clip ViT-B-32 (`laion2b_s34b_b79k`) embedding server, FastAPI on port 8001: `GET /health`, `POST /embed` |
-| `tribe_server.py` | GPU PC | TRIBE v2 brain-encoder server, port 8000, `POST /predict` (**not in the repo yet**) |
+| `tribe_server.py` | GPU PC | TRIBE v2 brain-encoder server, FastAPI on port 8000: `GET /health`, `POST /predict` (mean activation per timestep, top 10 vertices) |
 | `theremini_bridge.py` | installation PC | Moog Theremini USB MIDI (CC20 pitch, CC2 volume) → OSC `/theremin/*` → Unity |
 | `perception_pipeline.py` | installation PC | the earlier, simpler loop: Unity's `frame.jpg` → LLaVA → OSC `/perception/*` |
 | `memory_inspector.py` | anywhere | read-only report on the room's memory files (thoughts, hours, vocabulary, visits, reflections) |
@@ -53,6 +53,7 @@ All optional; defaults in brackets. See [`../config.example.env`](../config.exam
 |---|---|---|
 | `TRIBE_URL` [`http://localhost:8000`] | client | TRIBE v2 server (the GPU PC's LAN address, or an ngrok URL) |
 | `CLIP_URL` [`http://localhost:8001`] | client | open_clip server |
+| `TRIBE_CACHE` [`tribe_cache`] | TRIBE server | where the model and its per-clip features are stored; grows during a run |
 | `OLLAMA_URL` [`http://localhost:11434`] | client, pipeline | Ollama base URL |
 | `OLLAMA_MODEL` [`llava`] | client | Ollama vision model |
 | `BRIDGE_URL` [`http://localhost:8182`] | client | Kinect bridge (`../kinect-bridge`) |

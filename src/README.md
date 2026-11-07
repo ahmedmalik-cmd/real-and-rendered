@@ -1,6 +1,6 @@
 # src/
 
-The installation's runtime source, copied from the installation PC and cleaned for release
+The installation's runtime source, copied from the installation and GPU PCs and cleaned for release
 (machine addresses moved to environment variables, personal paths made relative).
 
 ## What's here
@@ -12,6 +12,7 @@ src/
     tribe_kinect_client.py   perception loop: clip producer, async TRIBE worker, MediaPipe pose worker,
                              CLIP recall, prompt assembly, LLaVA via Ollama, memory writes, nightly reflection
     clip_server.py           open_clip ViT-B-32 embedding server (POST /embed, port 8001; RTX 3090 PC)
+    tribe_server.py          TRIBE v2 brain-encoder server (POST /predict, port 8000; RTX 3090 PC)
     theremini_bridge.py      Moog Theremini MIDI (CC20 pitch, CC2 volume) → OSC → Unity
     perception_pipeline.py   earlier, simpler LLaVA loop (Unity frame.jpg → Ollama → OSC); see python/README.md
     memory_inspector.py      prints a summary of the room's memory files (reads them locally, writes nothing)
@@ -40,9 +41,6 @@ See [`../docs/architecture.md`](../docs/architecture.md) for how the pieces conn
 
 ## Still missing
 
-- **`tribe_server.py`** (TRIBE v2 brain-encoder server, POST /predict, port 8000). It is on the RTX 3090 PC
-  or a backup drive, not on the installation PC. Until it is added, `tribe_kinect_client.py` runs in
-  "LLaVA-only" mode when it can't reach TRIBE.
 - **Kinect SDK DLLs** for `Assets/Plugins/`, which come from the Kinect for Windows SDK and aren't redistributed here.
 - No compute shaders: the point cloud is drawn by `PointCloud.shader` alone.
 
@@ -68,8 +66,12 @@ Two machines, on the same network.
 ```bash
 pip install -r src/python/requirements-gpu.txt
 python src/python/clip_server.py        # listens on 0.0.0.0:8001
-python src/python/tribe_server.py       # port 8000 (not in the repo yet)
+python src/python/tribe_server.py       # listens on 0.0.0.0:8000
 ```
+
+TRIBE v2's model downloads on first run. Its text encoder is the gated [Llama 3.2-3B](https://huggingface.co/meta-llama/Llama-3.2-3B),
+so request access and log in with `huggingface-cli login` first. The weights are CC BY-NC 4.0 (non-commercial) and aren't
+included here. Neither server has a password, so keep them on a private network.
 
 **Installation PC** (Kinects, Theremini, projectors, Ollama, Unity build)
 

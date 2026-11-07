@@ -14,6 +14,10 @@ presence.json
 # Generated output (analysis/ writes here)
 out/
 
+# TRIBE v2 model and feature cache
+tribe_cache/
+*.ckpt
+
 # Video: only the short, metadata-stripped clips in media/video/ are published
 *.mov
 *.mp4

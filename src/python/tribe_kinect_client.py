@@ -682,7 +682,7 @@ def ask_llava(tribe_result, frame, memory):
 
     # trend: compare this mean to the recent rolling baseline. A real time
     # series — the old code compared activation[-1] vs activation[0], i.e.
-    # two arbitrary brain vertices, so it was noise that always read "rising".
+    # the two ends of one clip, so it was noise that always read "rising".
     if len(MEAN_HISTORY) >= 4:
         base   = sum(MEAN_HISTORY[-4:-1]) / 3.0
         spread = (max(MEAN_HISTORY) - min(MEAN_HISTORY)) or 1e-9

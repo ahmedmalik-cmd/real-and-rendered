@@ -1,7 +1,11 @@
-# clip_server.py (RTX 3090 PC). Install torch for your CUDA version first: https://pytorch.org
+# clip_server.py and tribe_server.py (RTX 3090 PC). Install torch for your CUDA version first: https://pytorch.org
 torch
 open_clip_torch
 pillow
 fastapi
 uvicorn
 python-multipart
+# tribe_server.py
+numpy
+pyyaml
+tribev2 @ git+https://github.com/facebookresearch/tribev2.git

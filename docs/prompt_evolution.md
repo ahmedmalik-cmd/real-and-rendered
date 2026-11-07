@@ -179,8 +179,8 @@ different people apart in the same room.
 **Symptom.** Every log entry showed `trend rising`, regardless of state.
 
 **Cause.** The old code computed `trend` by comparing `activation[-1]`
-to `activation[0]` — i.e. two arbitrary cortical vertices, not a time
-series.
+to `activation[0]` — i.e. the two ends of a single 2-second clip, not
+the signal over time.
 
 **Fix.** Trend now compares the latest `mean` to the average of the last
 three means (a real rolling baseline), classified `rising` / `flat` /

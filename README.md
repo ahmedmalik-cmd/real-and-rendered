@@ -52,7 +52,7 @@ From **[docs/engineering_log.md](docs/engineering_log.md)**, written during the 
 
 - **Latency from ~12 s to ~5 s per thought.** A serial pipeline (capture → brain model → language model → caption) became a single-slot clip producer plus an async TRIBE worker, so the language model reads the freshest brain result instead of waiting for it.
 - **Recognition without a database.** CLIP embeddings served from the GPU machine, plus a persistent visit log, let the room recognize returning visitors across days (cosine 0.84 threshold, tuned from the recall logs).
-- **A usable brain signal.** Raw activations sat between 0.00 and 0.01; rescaling against a rolling 10th–90th percentile gave the prompt real state changes. A "trend" metric that compared two arbitrary cortical vertices was rebuilt as an actual time series.
+- **A usable brain signal.** Raw activations sat between 0.00 and 0.01; rescaling against a rolling 10th–90th percentile gave the prompt real state changes. A "trend" metric that only compared the two ends of a single 2-second clip was rebuilt to follow the signal across clips.
 - **Graceful failure.** If the GPU machine drops, the client feeds synthetic zeros, keeps speaking, and re-probes `/health` every 60 s.
 - **Depth pipeline fixes.** A background plate that kept restoring a stale depth range, sensor calibration drift, and caption text occluded by depth-writing point shaders.
 - **Making a model sound like a place, not an assistant.** A first-person persona, regex filters for third-person and greeter speech, a fixation detector that steers off repeated words, question fatigue, an idle mode for still visitors, and refusal filtering before anything reaches long-term memory.
@@ -97,7 +97,7 @@ What the room said, curated by theme: **[docs/the_room_speaks.md](docs/the_room_
 ```
 docs/        architecture, engineering log, prompt evolution, one-pager, curated transcript
 src/         the installation's source; see src/README.md
-  python/        perception loop, CLIP server, Theremini bridge, memory inspector
+  python/        perception loop, TRIBE and CLIP servers, Theremini bridge, memory inspector
   unity/Assets/  Unity 2022.3 scripts and shaders: dual-Kinect merge, depth post-processing,
                  projector calibration and warp, captions, presence
   kinect-bridge/ C# (.NET Framework 4.8) service serving both Kinects' depth + colour over HTTP
@@ -123,8 +123,7 @@ ROOM_CAMERA=0 ROOM_DATA_DIR=./room-data python tribe_kinect_client.py
 
 It speaks a line every 30 s or so and keeps its memory in `./room-data` (git-ignored). On a Mac, allow the
 terminal to use the camera when asked. More in
-[src/python/README.md](src/python/README.md#try-it-without-the-installation). Still to be added from the GPU machine:
-`tribe_server.py`, the TRIBE v2 server.
+[src/python/README.md](src/python/README.md#try-it-without-the-installation).
 
 ### Run the analysis
 
